@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public int lives { get; private set; } = 3;
     public int coins { get; private set; } = 0;
     public int score { get; private set; } = 0;
+    public int highScore { get; private set; } = 0;
 
     private void Awake()
     {
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Application.targetFrameRate = 60;
+        LoadHighScore();
         NewGame();
     }
 
@@ -72,6 +74,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetLevel()
     {
+        CheckAndSaveHighScore(); // Kiểm tra và lưu high score trước khi reset
         lives--;
         score = 0;      // Reset điểm khi chết
         coins = 0;      // Reset xu khi chết
@@ -106,5 +109,20 @@ public class GameManager : MonoBehaviour
     public void AddScore(int points)
     {
         score += points;
+    }
+
+    private void LoadHighScore()
+    {
+        highScore = PlayerPrefs.GetInt("HighScore", 0);
+    }
+
+    public void CheckAndSaveHighScore()
+    {
+        if (score > highScore)
+        {
+            highScore = score;
+            PlayerPrefs.SetInt("HighScore", highScore);
+            PlayerPrefs.Save();
+        }
     }
 }
