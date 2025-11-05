@@ -8,7 +8,7 @@ public class Goomba : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && collision.gameObject.TryGetComponent(out Player player))
         {
-            if (player.starpower) {
+            if (GameManager.Instance.isInvincible || player.starpower) {
                 Hit();
             } else if (collision.transform.DotTest(transform, Vector2.down)) {
                 Flatten();
@@ -31,6 +31,7 @@ public class Goomba : MonoBehaviour
         GetComponent<EntityMovement>().enabled = false;
         GetComponent<AnimatedSprite>().enabled = false;
         GetComponent<SpriteRenderer>().sprite = flatSprite;
+        GameManager.Instance.AddScore(100);
         Destroy(gameObject, 0.5f);
     }
 
@@ -38,7 +39,9 @@ public class Goomba : MonoBehaviour
     {
         GetComponent<AnimatedSprite>().enabled = false;
         GetComponent<DeathAnimation>().enabled = true;
+        GameManager.Instance.AddScore(100);
         Destroy(gameObject, 3f);
+       
     }
 
 }

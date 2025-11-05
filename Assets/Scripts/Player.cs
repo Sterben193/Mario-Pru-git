@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -25,11 +25,21 @@ public class Player : MonoBehaviour
 
     public void Hit()
     {
+        // Kiểm tra bất tử
+        if (GameManager.Instance.isInvincible)
+        {
+            Debug.Log("Invincible! No damage taken.");
+            return;
+        }
+
         if (!dead && !starpower)
         {
-            if (big) {
+            if (big)
+            {
                 Shrink();
-            } else {
+            }
+            else
+            {
                 Death();
             }
         }
@@ -117,5 +127,12 @@ public class Player : MonoBehaviour
         activeRenderer.spriteRenderer.color = Color.white;
         starpower = false;
     }
-
+    public void EnableInvincibleMode()
+    {
+        activeRenderer.spriteRenderer.color = Color.green; // Màu xanh lá
+    }
+    public void DisableInvincibleMode()
+    {
+        activeRenderer.spriteRenderer.color = Color.white; // Màu gốc
+    }
 }

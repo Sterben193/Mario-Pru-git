@@ -1,21 +1,25 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [DefaultExecutionOrder(-1)]
 public class GameManager : MonoBehaviour
 {
+    public bool isInvincible = false;
     public static GameManager Instance { get; private set; }
-
     public int world { get; private set; } = 1;
     public int stage { get; private set; } = 1;
     public int lives { get; private set; } = 3;
     public int coins { get; private set; } = 0;
+    public int score { get; private set; } = 0;
 
     private void Awake()
     {
-        if (Instance != null) {
+        if (Instance != null)
+        {
             DestroyImmediate(gameObject);
-        } else {
+        }
+        else
+        {
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
@@ -23,7 +27,8 @@ public class GameManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (Instance == this) {
+        if (Instance == this)
+        {
             Instance = null;
         }
     }
@@ -37,9 +42,9 @@ public class GameManager : MonoBehaviour
     public void NewGame()
     {
         lives = 3;
+        score = 0;
         coins = 0;
-
-        LoadLevel(1, 1); //level change 
+        LoadLevel(1, 1);
     }
 
     public void GameOver()
@@ -51,7 +56,6 @@ public class GameManager : MonoBehaviour
     {
         this.world = world;
         this.stage = stage;
-
         SceneManager.LoadScene($"{world}-{stage}");
     }
 
@@ -69,10 +73,15 @@ public class GameManager : MonoBehaviour
     public void ResetLevel()
     {
         lives--;
+        score = 0;      // Reset điểm khi chết
+        coins = 0;      // Reset xu khi chết
 
-        if (lives > 0) {
-            LoadLevel(world, stage);
-        } else {
+        if (lives > 0)
+        {
+            LoadLevel(1, 1);  // Quay về map 1-1
+        }
+        else
+        {
             GameOver();
         }
     }
@@ -80,6 +89,7 @@ public class GameManager : MonoBehaviour
     public void AddCoin()
     {
         coins++;
+        AddScore(10);
 
         if (coins == 100)
         {
@@ -93,4 +103,8 @@ public class GameManager : MonoBehaviour
         lives++;
     }
 
+    public void AddScore(int points)
+    {
+        score += points;
+    }
 }
