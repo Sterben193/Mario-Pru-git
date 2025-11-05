@@ -78,11 +78,11 @@ public class GameManager : MonoBehaviour
 
         if (lives > 0)
         {
-            LoadLevel(1, 1);  // Quay về map 1-1
+            SceneManager.LoadSceneAsync(0); ;  // Quay về map 1-1
         }
         else
         {
-            GameOver();
+            SceneManager.LoadSceneAsync(0);
         }
     }
 
