@@ -103,6 +103,10 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity.y = jumpForce;
             jumping = true;
+            
+            // Play jump sound
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.PlayJump();
         }
     }
 

@@ -32,10 +32,16 @@ public class PowerUp : MonoBehaviour
                 break;
 
             case Type.MagicMushroom:
+                // Play powerup sound
+                if (SoundManager.Instance != null)
+                    SoundManager.Instance.PlayPowerup();
                 player.Grow();
                 break;
 
             case Type.Starpower:
+                // Play powerup sound
+                if (SoundManager.Instance != null)
+                    SoundManager.Instance.PlayPowerup();
                 player.Starpower();
                 break;
         }

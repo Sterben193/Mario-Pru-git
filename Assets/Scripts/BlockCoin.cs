@@ -7,6 +7,10 @@ public class BlockCoin : MonoBehaviour
     {
         GameManager.Instance.AddCoin();
 
+        // Play coin sound
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.PlayCoin();
+
         StartCoroutine(Animate());
     }
 

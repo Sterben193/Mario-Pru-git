@@ -12,7 +12,7 @@ public class Koopa : MonoBehaviour
     {
         if (!shelled && collision.gameObject.CompareTag("Player") && collision.gameObject.TryGetComponent(out Player player))
         {
-            if (player.starpower) {
+            if (player.starpower || GameManager.Instance.isInvincible) {
                 Hit();
             } else if (collision.transform.DotTest(transform, Vector2.down)) {
                 EnterShell();

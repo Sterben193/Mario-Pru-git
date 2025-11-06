@@ -32,6 +32,11 @@ public class Goomba : MonoBehaviour
         GetComponent<AnimatedSprite>().enabled = false;
         GetComponent<SpriteRenderer>().sprite = flatSprite;
         GameManager.Instance.AddScore(100);
+        
+        // Play stomp sound
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.PlayStomp();
+        
         Destroy(gameObject, 0.5f);
     }
 

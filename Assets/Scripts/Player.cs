@@ -51,6 +51,10 @@ public class Player : MonoBehaviour
         bigRenderer.enabled = false;
         deathAnimation.enabled = true;
 
+        // Play player die sound
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.PlayPlayerDie();
+
         GameManager.Instance.ResetLevel(3f);
     }
 
@@ -62,6 +66,10 @@ public class Player : MonoBehaviour
 
         capsuleCollider.size = new Vector2(1f, 2f);
         capsuleCollider.offset = new Vector2(0f, 0.5f);
+
+        // Play grow sound
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.PlayGrow();
 
         StartCoroutine(ScaleAnimation());
     }

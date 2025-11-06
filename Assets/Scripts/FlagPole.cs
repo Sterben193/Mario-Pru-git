@@ -30,9 +30,14 @@ public class FlagPole : MonoBehaviour
 
         player.gameObject.SetActive(false);
 
+        // Play stage clear sound
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.PlayStageClear();
+
         yield return new WaitForSeconds(2f);
 
-        GameManager.Instance.LoadLevel(nextWorld, nextStage);
+        // Gọi LevelComplete để kiểm tra nếu là map 1-3 thì hiện congratulation
+        GameManager.Instance.LevelComplete(nextWorld, nextStage);
     }
 
     private IEnumerator MoveTo(Transform subject, Vector3 position)
