@@ -281,7 +281,7 @@ public class GameManager : MonoBehaviour
             SoundManager.Instance.StopBackgroundMusic();
             SoundManager.Instance.PlayMenuMusic();
         }
-        
+        NewGame();
         // Tìm scene MainMenu (có thể là scene index 0 hoặc tên "MainMenu")
         SceneManager.LoadScene(0); // Hoặc SceneManager.LoadScene("MainMenu") nếu scene có tên đó
     }
